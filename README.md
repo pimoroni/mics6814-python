@@ -1,16 +1,15 @@
-# {{TITLE}}
+# MICS6814 Breakout Garden Breakout
 
-[![Build Status](https://travis-ci.com/pimoroni/{{LIBNAME}}-python.svg?branch=master)](https://travis-ci.com/pimoroni/{{LIBNAME}}-python)
-[![Coverage Status](https://coveralls.io/repos/github/pimoroni/{{LIBNAME}}-python/badge.svg?branch=master)](https://coveralls.io/github/pimoroni/{{LIBNAME}}-python?branch=master)
-[![PyPi Package](https://img.shields.io/pypi/v/{{LIBNAME}}.svg)](https://pypi.python.org/pypi/{{LIBNAME}})
-[![Python Versions](https://img.shields.io/pypi/pyversions/{{LIBNAME}}.svg)](https://pypi.python.org/pypi/{{LIBNAME}})
+[![Build Status](https://travis-ci.com/pimoroni/mics6814-python.svg?branch=master)](https://travis-ci.com/pimoroni/mics6814-python)
+[![Coverage Status](https://coveralls.io/repos/github/pimoroni/mics6814-python/badge.svg?branch=master)](https://coveralls.io/github/pimoroni/mics6814-python?branch=master)
+[![PyPi Package](https://img.shields.io/pypi/v/pimoroni-mics6814.svg)](https://pypi.python.org/pypi/pimoroni-mics6814)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pimoroni-mics6814.svg)](https://pypi.python.org/pypi/pimoroni-mics6814)
 
 # Pre-requisites
 
-You must enable (delete where appropriate):
+You must enable i2c:
 
 * i2c: `sudo raspi-config nonint do_i2c 0`
-* spi: `sudo raspi-config nonint do_spi 0`
 
 You can optionally run `sudo raspi-config` or the graphical Raspberry Pi Configuration UI to enable interfaces.
 
@@ -18,11 +17,11 @@ You can optionally run `sudo raspi-config` or the graphical Raspberry Pi Configu
 
 Stable library from PyPi:
 
-* Just run `sudo pip install {{LIBNAME}}`
+* Just run `sudo pip3 install pimoroni-mics6814`
 
 Latest/development library from GitHub:
 
-* `git clone https://github.com/pimoroni/{{LIBNAME}}-python`
-* `cd {{LIBNAME}}-python`
+* `git clone https://github.com/pimoroni/mics6814-python`
+* `cd mics6814-python`
 * `sudo ./install.sh`
 

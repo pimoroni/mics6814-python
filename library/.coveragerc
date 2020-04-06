@@ -1,4 +1,4 @@
 [run]
-source = {{LIBNAME}}
+source = mics6814
 omit =
     .tox/*
