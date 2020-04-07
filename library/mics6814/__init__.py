@@ -31,49 +31,49 @@ ADC (ref): {adc:05.02f} Volts
     __str__ = __repr__
 
 
-class MICS6814(io.IOE):
+class MICS6814():
     def __init__(self, i2c_addr=io.I2C_ADDR, interrupt_timeout=1.0, interrupt_pin=None, gpio=None):
-        io.IOE.__init__(self, i2c_addr, interrupt_timeout, interrupt_pin, gpio)
+        self._ioe = io.IOE(i2c_addr, interrupt_timeout, interrupt_pin, gpio)
 
-        self._chip_id = self.get_chip_id()
+        self._chip_id = self._ioe.get_chip_id()
 
         # TODO - Validate CHIP ID
 
-        self.set_pwm_period(255)
-        self.set_mode(3, io.PWM)   # P1.2 LED Red
-        self.set_mode(7, io.PWM)   # P1.1 LED Green
-        self.set_mode(2, io.PWM)   # P1.0 LED Blue
+        self._ioe.set_pwm_period(255)
+        self._ioe.set_mode(3, io.PWM)   # P1.2 LED Red
+        self._ioe.set_mode(7, io.PWM)   # P1.1 LED Green
+        self._ioe.set_mode(2, io.PWM)   # P1.0 LED Blue
 
-        self.set_mode(9, io.ADC)   # P0.4 AIN5 - 2v8
-        self.set_mode(12, io.ADC)  # P0.5 AIN4 - Red
-        self.set_mode(11, io.ADC)  # P0.6 AIN3 - NH3
-        self.set_mode(13, io.ADC)  # P0.7 AIN2 - OX
+        self._ioe.set_mode(9, io.ADC)   # P0.4 AIN5 - 2v8
+        self._ioe.set_mode(12, io.ADC)  # P0.5 AIN4 - Red
+        self._ioe.set_mode(11, io.ADC)  # P0.6 AIN3 - NH3
+        self._ioe.set_mode(13, io.ADC)  # P0.7 AIN2 - OX
 
-        self.set_mode(1, io.OUT)   # P1.5 Heater Enable
-        self.output(1, io.LOW)
+        self._ioe.set_mode(1, io.OUT)   # P1.5 Heater Enable
+        self._ioe.output(1, io.LOW)
 
     def set_heater(self, value):
-        self.output(1, io.LOW if value else io.HIGH)
+        self._ioe.output(1, io.LOW if value else io.HIGH)
 
-    def disable_heater(self, value):
-        self.output(1, io.HIGH)
-        self.set_mode(1, io.IN)
+    def disable_heater(self):
+        self._ioe.output(1, io.HIGH)
+        self._ioe.set_mode(1, io.IN)
 
     def get_raw_ref(self):
         """Return raw reference ADC reading."""
-        return self.input(9)
+        return self._ioe.input(9)
 
     def get_raw_red(self):
         """Return raw oxidizing Reducing Gasses reading."""
-        return self.input(12)
+        return self._ioe.input(12)
 
     def get_raw_nh3(self):
         """Return raw NH3 ADC reading."""
-        return self.input(11)
+        return self._ioe.input(11)
 
     def get_raw_oxd(self):
         """Return raw Oxidizingc Gasses ADC reading."""
-        return self.input(13)
+        return self._ioe.input(13)
 
     def set_led(self, r, g, b):
         """Set onboard LED to RGB value.
@@ -83,9 +83,9 @@ class MICS6814(io.IOE):
         :param b: Amount of Blue (0-255)
 
         """
-        ioe.output(3, r)
-        ioe.output(7, g)
-        ioe.output(2, b)
+        self._ioe.output(3, r)
+        self._ioe.output(7, g)
+        self._ioe.output(2, b)
 
     def read_all(self):
         """Return gas resistence for oxidising, reducing and NH3"""
@@ -94,7 +94,7 @@ class MICS6814(io.IOE):
         nh3 = self.get_raw_nh3()
         oxd = self.get_raw_oxd()
 
-        vref = self.get_adc_vref()
+        vref = self._ioe.get_adc_vref()
 
         try:
             red = (red * 56000) / (vref - red)
