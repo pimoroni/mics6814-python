@@ -64,7 +64,7 @@ class MICS6814():
         return self._ioe.input(9)
 
     def get_raw_red(self):
-        """Return raw oxidizing Reducing Gasses reading."""
+        """Return raw Reducing Gasses reading."""
         return self._ioe.input(12)
 
     def get_raw_nh3(self):
@@ -72,7 +72,7 @@ class MICS6814():
         return self._ioe.input(11)
 
     def get_raw_oxd(self):
-        """Return raw Oxidizingc Gasses ADC reading."""
+        """Return raw Oxidizing Gasses ADC reading."""
         return self._ioe.input(13)
 
     def set_led(self, r, g, b):
@@ -88,7 +88,7 @@ class MICS6814():
         self._ioe.output(2, b)
 
     def read_all(self):
-        """Return gas resistence for oxidising, reducing and NH3"""
+        """Return gas resistance for oxidising, reducing and NH3"""
         ref = self.get_raw_ref()
         red = self.get_raw_red()
         nh3 = self.get_raw_nh3()
