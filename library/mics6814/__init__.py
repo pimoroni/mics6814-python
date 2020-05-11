@@ -39,7 +39,8 @@ class MICS6814():
 
         # TODO - Validate CHIP ID
 
-        self._ioe.set_pwm_period(255)
+        self.set_pwm_period(2048)
+        self.set_brightness(1.0)
         self._ioe.set_mode(3, io.PWM)   # P1.2 LED Red
         self._ioe.set_mode(7, io.PWM)   # P1.1 LED Green
         self._ioe.set_mode(2, io.PWM)   # P1.0 LED Blue
@@ -51,6 +52,19 @@ class MICS6814():
 
         self._ioe.set_mode(1, io.OUT)   # P1.5 Heater Enable
         self._ioe.output(1, io.LOW)
+
+    def set_brightness(self, brightness):
+        """Set the LED brightness.
+
+        :param brightness: From 0.0 to 1.0
+
+        """
+        self.brightness = brightness
+
+    def set_pwm_period(self, value):
+        """Set the LED PWM period."""
+        self.pwm_period = value
+        self._ioe.set_pwm_period(value)
 
     def set_heater(self, value):
         self._ioe.output(1, io.LOW if value else io.HIGH)
@@ -83,9 +97,12 @@ class MICS6814():
         :param b: Amount of Blue (0-255)
 
         """
-        self._ioe.output(3, r)
-        self._ioe.output(7, g)
-        self._ioe.output(2, b)
+        r = self.pwm_period - (r * self.pwm_period / 255.0 * self.brightness)
+        g = self.pwm_period - (g * self.pwm_period / 255.0 * self.brightness)
+        b = self.pwm_period - (b * self.pwm_period / 255.0 * self.brightness)
+        self._ioe.output(3, int(r))
+        self._ioe.output(7, int(g))
+        self._ioe.output(2, int(b))
 
     def read_all(self):
         """Return gas resistance for oxidising, reducing and NH3"""
