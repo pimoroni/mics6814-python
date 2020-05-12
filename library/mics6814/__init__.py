@@ -39,7 +39,9 @@ class MICS6814():
 
         # TODO - Validate CHIP ID
 
-        self.set_pwm_period(2048)
+        self.set_pwm_period(5100)
+        self._ioe.set_pwm_control(divider=1)
+
         self.set_brightness(1.0)
         self._ioe.set_mode(3, io.PWM)   # P1.2 LED Red
         self._ioe.set_mode(7, io.PWM)   # P1.1 LED Green
@@ -62,14 +64,24 @@ class MICS6814():
         self.brightness = brightness
 
     def set_pwm_period(self, value):
-        """Set the LED PWM period."""
+        """Set the LED PWM period.
+
+        :param value: PWM period from 255 to 65535
+
+        """
         self.pwm_period = value
         self._ioe.set_pwm_period(value)
 
     def set_heater(self, value):
+        """Set the status of the gas heater.
+
+        :param value: Heater on/off (True/False)
+
+        """
         self._ioe.output(1, io.LOW if value else io.HIGH)
 
     def disable_heater(self):
+        """Disable the gas heater."""
         self._ioe.output(1, io.HIGH)
         self._ioe.set_mode(1, io.IN)
 
