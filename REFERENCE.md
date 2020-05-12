@@ -7,6 +7,8 @@
 - [Function Reference](#function-reference)
   - [set_header](#set_header)
   - [set_led](#set_led)
+  - [set_brightness](#set_brightness)
+  - [set_pwm_period](#set_pwm_period)
   - [read_all](#read_all)
   - [read_oxidising](#read_oxidising)
   - [read_reducing](#read_reducing)
@@ -74,6 +76,30 @@ mics6814.set_led(red, green, blue)
 Set the onboard indicator LED.
 
 Red, green and blue values should be a number from 0-255.
+
+### set_brightness
+
+```python
+mics6814.set_brightness(brightness)
+```
+
+Set the brightness of the breakout LEDs. This scales the PWM duty cycle for all LED channels (Red, Green & Blue).
+
+Valid values range from 0 (off) to 1.0 (full brightness) and the on period of the LED is equal to:
+
+```python
+pwm_period - (colour_brightness * pwm_period / 255.0 * brightness)
+```
+
+### set_pwm_period
+
+```python
+mics6814.set_pwm_period(value)
+```
+
+Set the PWM period of the breakout LEDs.
+
+Valid values range from 255 (the minimum period required for full colour fidelity at full brightness) to 65535 and offer LED PWM frequencies from around 94KHz to 366Hz.
 
 ### read_all
 
