@@ -30,3 +30,8 @@ Latest/development library and dependencies from GitHub:
 Stable (library only) from PyPi:
 
 * Just run `sudo pip3 install pimoroni-mics6814`
+# Changelog
+0.0.1
+-----
+
+* Initial Release
