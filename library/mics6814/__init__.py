@@ -4,6 +4,19 @@ import ioexpander as io
 
 __version__ = '0.0.1'
 
+MICS6814_I2C_ADDR = 0x19
+
+MICS6814_LED_R = 3 # P1.2
+MICS6814_LED_G = 7 # P1.1
+MICS6814_LED_B = 2 # P1.0
+
+MICS6814_VREF = 14 # P1.4 AIN0 - 3v3
+MICS6814_RED = 12  # P0.5 AIN4 - Reducing
+MICS6814_NH3 = 11  # P0.6 AIN3 - NH3
+MICS6814_OX = 13   # P0.7 AIN2 - Oxidizing
+
+MICS6814_HEATER_EN = 1 # P1.5 Heater Enable
+
 
 class Mics6814Reading(object):
     __slots__ = 'oxidising', 'reducing', 'nh3', 'adc'
@@ -32,7 +45,7 @@ ADC (ref): {adc:05.02f} Volts
 
 
 class MICS6814():
-    def __init__(self, i2c_addr=io.I2C_ADDR, interrupt_timeout=1.0, interrupt_pin=None, gpio=None):
+    def __init__(self, i2c_addr=MICS6814_I2C_ADDR, interrupt_timeout=1.0, interrupt_pin=None, gpio=None):
         self._ioe = io.IOE(i2c_addr, interrupt_timeout, interrupt_pin, gpio)
 
         self._chip_id = self._ioe.get_chip_id()
@@ -43,17 +56,17 @@ class MICS6814():
         self._ioe.set_pwm_control(divider=1)
 
         self.set_brightness(1.0)
-        self._ioe.set_mode(3, io.PWM)   # P1.2 LED Red
-        self._ioe.set_mode(7, io.PWM)   # P1.1 LED Green
-        self._ioe.set_mode(2, io.PWM)   # P1.0 LED Blue
+        self._ioe.set_mode(MICS6814_LED_R, io.PWM)   # P1.2 LED Red
+        self._ioe.set_mode(MICS6814_LED_G, io.PWM)   # P1.1 LED Green
+        self._ioe.set_mode(MICS6814_LED_B, io.PWM)   # P1.0 LED Blue
 
-        self._ioe.set_mode(9, io.ADC)   # P0.4 AIN5 - 2v8
-        self._ioe.set_mode(12, io.ADC)  # P0.5 AIN4 - Red
-        self._ioe.set_mode(11, io.ADC)  # P0.6 AIN3 - NH3
-        self._ioe.set_mode(13, io.ADC)  # P0.7 AIN2 - OX
+        self._ioe.set_mode(MICS6814_VREF, io.ADC)    # P1.4 AIN5 - 2v8
+        self._ioe.set_mode(MICS6814_RED, io.ADC)     # P0.5 AIN4 - Red
+        self._ioe.set_mode(MICS6814_NH3, io.ADC)     # P0.6 AIN3 - NH3
+        self._ioe.set_mode(MICS6814_OX, io.ADC)      # P0.7 AIN2 - OX
 
-        self._ioe.set_mode(1, io.OUT)   # P1.5 Heater Enable
-        self._ioe.output(1, io.LOW)
+        self._ioe.set_mode(MICS6814_HEATER_EN, io.OUT)   # P1.5 Heater Enable
+        self._ioe.output(MICS6814_HEATER_EN, io.LOW)
 
     def set_brightness(self, brightness):
         """Set the LED brightness.
@@ -82,24 +95,24 @@ class MICS6814():
 
     def disable_heater(self):
         """Disable the gas heater."""
-        self._ioe.output(1, io.HIGH)
-        self._ioe.set_mode(1, io.IN)
+        self._ioe.output(MICS6814_HEATER_EN, io.HIGH)
+        self._ioe.set_mode(MICS6814_HEATER_EN, io.IN)
 
     def get_raw_ref(self):
         """Return raw reference ADC reading."""
-        return self._ioe.input(9)
+        return self._ioe.input(MICS6814_VREF)
 
     def get_raw_red(self):
         """Return raw Reducing Gasses reading."""
-        return self._ioe.input(12)
+        return self._ioe.input(MICS6814_RED)
 
     def get_raw_nh3(self):
         """Return raw NH3 ADC reading."""
-        return self._ioe.input(11)
+        return self._ioe.input(MICS6814_NH3)
 
     def get_raw_oxd(self):
         """Return raw Oxidizing Gasses ADC reading."""
-        return self._ioe.input(13)
+        return self._ioe.input(MICS6814_OX)
 
     def set_led(self, r, g, b):
         """Set onboard LED to RGB value.
@@ -112,9 +125,9 @@ class MICS6814():
         r = self.pwm_period - (r * self.pwm_period / 255.0 * self.brightness)
         g = self.pwm_period - (g * self.pwm_period / 255.0 * self.brightness)
         b = self.pwm_period - (b * self.pwm_period / 255.0 * self.brightness)
-        self._ioe.output(3, int(r))
-        self._ioe.output(7, int(g))
-        self._ioe.output(2, int(b))
+        self._ioe.output(MICS6814_LED_R, int(r))
+        self._ioe.output(MICS6814_LED_G, int(g))
+        self._ioe.output(MICS6814_LED_B, int(b))
 
     def read_all(self):
         """Return gas resistance for oxidising, reducing and NH3"""
