@@ -1,4 +1,3 @@
-import pytest
 import mock
 
 
@@ -30,7 +29,7 @@ def test_get_raw_ref(ioexpander):
     mics6814 = MICS6814()
 
     mics6814.get_raw_ref()
-    mics6814._ioe.input.assert_called_with(9)
+    mics6814._ioe.input.assert_called_with(14)
 
 
 def test_get_raw_red(ioexpander):
