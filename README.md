@@ -1,6 +1,6 @@
 # MICS6814 Breakout Garden Breakout
 
-[![Build Status](https://travis-ci.com/pimoroni/mics6814-python.svg?branch=master)](https://travis-ci.com/pimoroni/mics6814-python)
+[![Build Status](https://shields.io/github/workflow/status/pimoroni/mics6814-python/Python%20Tests)](https://github.com/pimoroni/mics6814-python/actions)
 [![Coverage Status](https://coveralls.io/repos/github/pimoroni/mics6814-python/badge.svg?branch=master)](https://coveralls.io/github/pimoroni/mics6814-python?branch=master)
 [![PyPi Package](https://img.shields.io/pypi/v/pimoroni-mics6814.svg)](https://pypi.python.org/pypi/pimoroni-mics6814)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pimoroni-mics6814.svg)](https://pypi.python.org/pypi/pimoroni-mics6814)
