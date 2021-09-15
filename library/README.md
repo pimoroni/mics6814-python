@@ -32,6 +32,11 @@ Stable (library only) from PyPi:
 * Just run `sudo pip3 install pimoroni-mics6814`
 
 # Changelog
+0.0.2
+-----
+
+* Swap Oxidizing/Reducing pins so readings are correct
+
 0.0.1
 -----
 
