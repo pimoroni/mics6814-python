@@ -13,9 +13,9 @@ def test_setup(ioexpander):
         mock.call(2, ioexpander.PWM),
 
         mock.call(14, ioexpander.ADC),
-        mock.call(12, ioexpander.ADC),
-        mock.call(11, ioexpander.ADC),
         mock.call(13, ioexpander.ADC),
+        mock.call(11, ioexpander.ADC),
+        mock.call(12, ioexpander.ADC),
 
         mock.call(1, ioexpander.OUT)
     ))

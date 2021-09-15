@@ -38,7 +38,7 @@ def test_get_raw_red(ioexpander):
     mics6814 = MICS6814()
 
     mics6814.get_raw_red()
-    mics6814._ioe.input.assert_called_with(12)
+    mics6814._ioe.input.assert_called_with(13)
 
 
 def test_get_raw_nh3(ioexpander):
@@ -56,7 +56,7 @@ def test_get_raw_oxd(ioexpander):
     mics6814 = MICS6814()
 
     mics6814.get_raw_oxd()
-    mics6814._ioe.input.assert_called_with(13)
+    mics6814._ioe.input.assert_called_with(12)
 
 
 def test_get_adc(ioexpander):
