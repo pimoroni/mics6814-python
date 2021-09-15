@@ -10,9 +10,9 @@ MICS6814_LED_G = 7  # P1.1
 MICS6814_LED_B = 2  # P1.0
 
 MICS6814_VREF = 14  # P1.4 AIN0 - 3v3
-MICS6814_RED = 13   # P0.7 AIN2 - Oxidizing
+MICS6814_RED = 13   # P0.7 AIN2 - Reducing
 MICS6814_NH3 = 11   # P0.6 AIN3 - NH3
-MICS6814_OX = 12    # P0.5 AIN4 - Reducing
+MICS6814_OX = 12    # P0.5 AIN4 - Oxidizing
 
 MICS6814_HEATER_EN = 1  # P1.5 Heater Enable
 
