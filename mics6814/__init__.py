@@ -1,6 +1,5 @@
 import ioexpander as io
 
-
 __version__ = '0.0.2'
 
 MICS6814_I2C_ADDR = 0x19

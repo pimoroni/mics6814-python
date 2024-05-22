@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import time
-from mics6814 import MICS6814
 import logging
+import time
+
+from mics6814 import MICS6814
 
 gas = MICS6814()
 
