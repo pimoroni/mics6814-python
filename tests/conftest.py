@@ -4,7 +4,7 @@ import mock
 import pytest
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def cleanup():
     """This fixture removes modules under test from sys.modules.
 

@@ -10,7 +10,7 @@ Basic example of setting the RGB status LED on the MICS6814 breakout.
 """)
 
 if len(sys.argv) < 4:
-    print("Usage: {} <r> <g> <b>".format(sys.argv[0]))
+    print(f"Usage: {sys.argv[0]} <r> <g> <b>")
     sys.exit(1)
 
 mics = MICS6814()
