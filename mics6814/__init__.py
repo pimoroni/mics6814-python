@@ -1,7 +1,6 @@
 import ioexpander as io
 
-
-__version__ = '0.0.2'
+__version__ = "1.0.0"
 
 MICS6814_I2C_ADDR = 0x19
 
@@ -18,7 +17,7 @@ MICS6814_HEATER_EN = 1  # P1.5 Heater Enable
 
 
 class Mics6814Reading(object):
-    __slots__ = 'oxidising', 'reducing', 'nh3', 'adc'
+    __slots__ = "oxidising", "reducing", "nh3", "adc"
 
     def __init__(self, ox, red, nh3, adc=None):
         self.oxidising = ox
@@ -27,18 +26,14 @@ class Mics6814Reading(object):
         self.adc = adc
 
     def __repr__(self):
-        fmt = """Oxidising: {ox:05.02f} Ohms
-Reducing: {red:05.02f} Ohms
-NH3: {nh3:05.02f} Ohms"""
+        repr = f"""Oxidising: {self.oxidising:05.02f} Ohms
+Reducing: {self.reducing:05.02f} Ohms
+NH3: {self.nh3:05.02f} Ohms"""
         if self.adc is not None:
-            fmt += """
-ADC (ref): {adc:05.02f} Volts
+            repr += """
+ADC (ref): {self.adc:05.02f} Volts
 """
-        return fmt.format(
-            ox=self.oxidising,
-            red=self.reducing,
-            nh3=self.nh3,
-            adc=self.adc)
+        return repr
 
     __str__ = __repr__
 

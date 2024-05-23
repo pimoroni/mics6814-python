@@ -68,7 +68,7 @@ def test_get_adc(ioexpander):
 
 
 def test_read_all(ioexpander):
-    from mics6814 import MICS6814, Mics6814Reading
+    from mics6814 import MICS6814, MICS6814_NH3, MICS6814_OX, MICS6814_RED, MICS6814_VREF, Mics6814Reading
 
     mics6814 = MICS6814()
 
@@ -78,11 +78,11 @@ def test_read_all(ioexpander):
     reading = mics6814.read_all()
 
     assert type(reading) == Mics6814Reading
-    mics6814._ioe.input.has_calls((
-        mock.call(9),
-        mock.call(12),
-        mock.call(11),
-        mock.call(13),
+    mics6814._ioe.input.assert_has_calls((
+        mock.call(MICS6814_VREF),
+        mock.call(MICS6814_RED),
+        mock.call(MICS6814_NH3),
+        mock.call(MICS6814_OX),
     ))
 
     assert "Oxidising" in str(reading)
@@ -115,13 +115,14 @@ def test_read_oxd_red_nh3_zero_division(ioexpander):
 
 
 def test_set_led(ioexpander):
-    from mics6814 import MICS6814
+    from mics6814 import MICS6814, MICS6814_HEATER_EN, MICS6814_LED_B, MICS6814_LED_G, MICS6814_LED_R
 
     mics6814 = MICS6814()
     mics6814.set_led(255, 155, 55)
 
-    assert mics6814._ioe.output.has_calls((
-        mock.call(3, 255),
-        mock.call(7, 155),
-        mock.call(2, 55)
+    mics6814._ioe.output.assert_has_calls((
+        mock.call(MICS6814_HEATER_EN, ioexpander.LOW),
+        mock.call(MICS6814_LED_R, 0),
+        mock.call(MICS6814_LED_G, 2000),
+        mock.call(MICS6814_LED_B, 4000)
     ))

@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-import time
-from mics6814 import MICS6814
 import logging
+import time
+
+from mics6814 import MICS6814
 
 gas = MICS6814()
 
 logging.basicConfig(
-    format='%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s',
+    format="%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s",
     level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
+    datefmt="%Y-%m-%d %H:%M:%S")
 
 print("""gas.py - Print readings from the MICS6814 Gas sensor.
 
