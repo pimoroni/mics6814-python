@@ -35,7 +35,7 @@ classifiers = [
     "Topic :: System :: Hardware",
 ]
 dependencies = [
-    "pimoroni-ioexpander>=0.0.5"
+    "pimoroni-ioexpander>=1.0.0"
 ]
 
 [project.urls]
