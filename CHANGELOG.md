@@ -1,3 +1,9 @@
+1.0.0
+-----
+
+* Port to hatch/pyproject.toml
+* Bump to ioexpander >= 1.0.0
+
 0.0.2
 -----
 
