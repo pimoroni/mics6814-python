@@ -28,7 +28,7 @@ In the new terminal window type the command exactly as it appears below (check f
 Stable library and dependencies from GitHub:
 
 * `git clone https://github.com/pimoroni/mics6814-python`
-* `cd mics6814-python`2
+* `cd mics6814-python`
 * `sudo ./install.sh`
 
 Latest/development library and dependencies from GitHub:
