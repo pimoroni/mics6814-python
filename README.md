@@ -29,13 +29,13 @@ Stable library and dependencies from GitHub:
 
 * `git clone https://github.com/pimoroni/mics6814-python`
 * `cd mics6814-python`
-* `sudo ./install.sh`
+* `./install.sh`
 
 Latest/development library and dependencies from GitHub:
 
 * `git clone https://github.com/pimoroni/mics6814-python`
 * `cd mics6814-python`
-* `sudo ./install.sh --unstable`
+* `./install.sh --unstable`
 
 **Note** Libraries will be installed in the "pimoroni" virtual environment, you will need to activate it to run examples:
 
