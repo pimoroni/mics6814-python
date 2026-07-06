@@ -77,7 +77,7 @@ def test_read_all(ioexpander):
 
     reading = mics6814.read_all()
 
-    assert type(reading) == Mics6814Reading
+    assert isinstance(reading, Mics6814Reading)
     mics6814._ioe.input.assert_has_calls((
         mock.call(MICS6814_VREF),
         mock.call(MICS6814_RED),
