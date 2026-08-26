@@ -16,8 +16,8 @@ MICS6814_OX = 12    # P0.5 AIN4 - Oxidizing
 MICS6814_HEATER_EN = 1  # P1.5 Heater Enable
 
 
-class Mics6814Reading(object):
-    __slots__ = "oxidising", "reducing", "nh3", "adc"
+class Mics6814Reading:
+    __slots__ = "adc", "nh3", "oxidising", "reducing"
 
     def __init__(self, ox, red, nh3, adc=None):
         self.oxidising = ox
@@ -38,7 +38,7 @@ ADC (ref): {self.adc:05.02f} Volts
     __str__ = __repr__
 
 
-class MICS6814():
+class MICS6814:
     def __init__(self, i2c_addr=MICS6814_I2C_ADDR, interrupt_timeout=1.0, interrupt_pin=None, gpio=None):
         self._ioe = io.IOE(i2c_addr, interrupt_timeout, interrupt_pin, gpio)
 
