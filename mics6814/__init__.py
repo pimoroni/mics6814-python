@@ -1,6 +1,11 @@
+from importlib.metadata import PackageNotFoundError, version
+
 import ioexpander as io
 
-__version__ = "1.0.0"
+try:
+    __version__ = version("mics6814")
+except PackageNotFoundError:
+    __version__ = "0.0.0"
 
 MICS6814_I2C_ADDR = 0x19
 
